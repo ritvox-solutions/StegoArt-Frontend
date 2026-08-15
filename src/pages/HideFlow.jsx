@@ -9,7 +9,6 @@ import StyleGallery from "../components/StyleGallery";
 import ProcessingState from "../components/ProcessingState";
 import ImageCompareCard from "../components/ImageCompareCard";
 import MetricsPanel from "../components/MetricsPanel";
-import StyledDecodeNotice from "../components/StyledDecodeNotice";
 
 const STEP_LABELS = ["Cover image", "Secret", "Style", "Processing", "Result"];
 
@@ -203,7 +202,6 @@ function StepResult({ result, onTryExtracting, onStartOver }) {
             label="Styled version"
             src={styledUrl}
             filename={`stego-${result.styled_decode_supported ? "styled" : "styled-display-only"}.png`}
-            footer={!result.styled_decode_supported && <div className="my-2"><StyledDecodeNotice mode="result" /></div>}
           />
         )}
       </div>

@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
 import { getStyles, getStyleThumbnailUrl } from "../api/client";
-import StyledDecodeNotice from "./StyledDecodeNotice";
 
 /**
  * "No style" is a real tile in the gallery itself (not a separate
@@ -23,10 +22,7 @@ export default function StyleGallery({ selectedStyle, onSelect }) {
   }, []);
 
   return (
-    <div>
-      <StyledDecodeNotice mode="notice" />
-
-      <div className="mt-4 grid grid-cols-2 gap-3 sm:grid-cols-3 md:grid-cols-5">
+    <div className="grid grid-cols-2 gap-3 sm:grid-cols-3 md:grid-cols-5">
         <button
           type="button"
           onClick={() => onSelect(null)}
@@ -70,7 +66,6 @@ export default function StyleGallery({ selectedStyle, onSelect }) {
             <span className="text-sm font-medium capitalize text-text">{s.name.replace(/_/g, " ")}</span>
           </button>
         ))}
-      </div>
     </div>
   );
 }

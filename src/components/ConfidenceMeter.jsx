@@ -1,9 +1,14 @@
 /**
- * Zone thresholds match the backend's own empirical finding (see
- * backend/services/stego_service.py's text_decode_confidence docstring):
- * clean decodes measured 0.997-0.999, styled/corrupted decodes 0.39-0.59 —
- * a threshold around 0.8 cleanly separates them. Amber covers the
- * uncertain middle ground between "clearly fine" and "clearly bad."
+ * Zone thresholds: clean decodes measure ~0.997-0.999, so 0.8 is a safe
+ * "high confidence" floor. Amber covers the uncertain middle ground between
+ * "clearly fine" and "clearly bad."
+ *
+ * Note: with the current style-robust ("v3") backend weights, a *styled*
+ * decode can also legitimately score in the high zone (measured ~0.92-0.95
+ * for text) — this is no longer a clean-vs-styled signal the way it was
+ * with the original weights (see backend/services/stego_service.py's
+ * text_decode_confidence docstring). It's just "how sure the decoder
+ * seemed," nothing more.
  */
 function zoneFor(confidence) {
   if (confidence >= 0.8) return { key: "high", label: "High confidence", color: "success" };
