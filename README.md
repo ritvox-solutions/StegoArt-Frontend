@@ -16,9 +16,11 @@ git clone <frontend-repo-url> frontend
 cd frontend
 ```
 
-This repo only runs the UI. It talks to the backend over HTTP, so you'll
-also need the `backend` and `ml` repos cloned as siblings of this folder —
-see the [root README](../README.md) for the full multi-repo setup.
+This repo only runs the UI — it talks to the backend over HTTP(S) using
+whatever URL `VITE_API_BASE_URL` is set to (see Setup below), so it doesn't
+need the `backend` or `ml` repos cloned alongside it. For local development
+against a backend running on the same machine, see the
+[root README](../README.md).
 
 ## Stack
 

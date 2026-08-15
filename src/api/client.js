@@ -7,7 +7,10 @@
  */
 import axios from "axios";
 
-export const API_BASE_URL = "http://127.0.0.1:8000";
+// In production (Vercel), set VITE_API_BASE_URL to your backend's public
+// HTTPS URL (e.g. https://api.yourdomain.com) as a project environment
+// variable. Falls back to the local FastAPI dev server when unset.
+export const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || "http://127.0.0.1:8000";
 
 // Mirrors backend/utils/validation.py exactly (ALLOWED_IMAGE_FORMATS / MAX_FILE_SIZE_BYTES).
 // Client-side checks here are a UX convenience (fail fast, no round trip) —
