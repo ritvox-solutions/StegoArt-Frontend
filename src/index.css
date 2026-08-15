@@ -1,0 +1,77 @@
+@import "tailwindcss";
+
+@theme {
+  --font-sans: "Inter", ui-sans-serif, system-ui, -apple-system, sans-serif;
+
+  /* base surfaces */
+  --color-base: #0f1115;
+  --color-surface: #171a21;
+  --color-surface-hover: #1d212a;
+  --color-surface-raised: #20242e;
+  --color-border: #2a2e38;
+  --color-border-subtle: #21242c;
+
+  /* text */
+  --color-text: #f4f5f7;
+  --color-text-muted: #9aa0ac;
+  --color-text-faint: #6b7280;
+
+  /* brand accent (indigo -> magenta gradient for primary actions) */
+  --color-brand-from: #6366f1;
+  --color-brand-to: #d946ef;
+  --color-brand: #818cf8;
+
+  /* semantic */
+  --color-success: #2dd4bf;
+  --color-success-bg: #0d2b28;
+  --color-success-border: #145048;
+  --color-warning: #f59e0b;
+  --color-warning-bg: #2e2408;
+  --color-warning-border: #6b4e0a;
+  --color-danger: #f87171;
+  --color-danger-bg: #2c1414;
+  --color-danger-border: #5c2323;
+}
+
+html {
+  color-scheme: dark;
+}
+
+body {
+  background-color: var(--color-base);
+  color: var(--color-text);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Keyboard focus should always be visible and unambiguous — this is an
+   academic/technical tool, accessibility is a requirement, not polish. */
+:focus-visible {
+  outline: 2px solid var(--color-brand);
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
+.brand-gradient-text {
+  background-image: linear-gradient(90deg, var(--color-brand-from), var(--color-brand-to));
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: transparent;
+}
+
+.brand-gradient-bg {
+  background-image: linear-gradient(90deg, var(--color-brand-from), var(--color-brand-to));
+}
+
+/* thin, unobtrusive scrollbars fitting the dark theme */
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background-color: var(--color-border);
+  border-radius: 999px;
+}
