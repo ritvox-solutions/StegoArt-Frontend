@@ -38,8 +38,8 @@ npm run dev       # http://localhost:5173
 ```
 
 Requires the backend running at `http://127.0.0.1:8000` (see `../backend`).
-The dev server's origin is already whitelisted in the backend's CORS config,
-so no proxy setup is needed.
+The dev server's origin is already whitelisted in the backend's default CORS
+config, so no proxy setup is needed.
 
 Other scripts:
 
@@ -48,6 +48,28 @@ npm run build      # production build to dist/
 npm run preview    # serve the production build locally
 npm run lint        # oxlint
 ```
+
+## Deploying to Vercel
+
+The API base URL is read from `VITE_API_BASE_URL` at build time
+(`src/api/client.js`), falling back to `http://127.0.0.1:8000` when unset —
+that fallback is only meant for local dev, so it must be overridden in
+Vercel:
+
+1. In the Vercel project → **Settings → Environment Variables**, add
+   `VITE_API_BASE_URL` = the backend's public **HTTPS** URL (e.g.
+   `https://api.yourdomain.com`), for the Production (and Preview, if you
+   want preview deployments to work) environments.
+2. Redeploy — Vite env vars are baked in at build time, so a running
+   deployment won't pick up a changed value until it rebuilds.
+3. Make sure the backend's `CORS_ALLOWED_ORIGINS` includes this Vercel
+   deployment's origin (see `../backend/README.md`'s Deploying section) —
+   otherwise the browser will block the requests even though the URL is
+   correct.
+
+Framework preset: Vite. Root directory: this repo's root (`frontend/` if
+deploying from a monorepo-style checkout, or the repo root if `frontend`
+was pushed as its own standalone repo).
 
 ## Structure
 
