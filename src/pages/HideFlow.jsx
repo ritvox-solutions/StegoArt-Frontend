@@ -13,8 +13,7 @@ import MetricsPanel from "../components/MetricsPanel";
 const STEP_LABELS = ["Cover image", "Secret", "Style", "Processing", "Result"];
 
 export default function HideFlow() {
-  const { state, setStep, setCoverFile, setSecretType, setSecretText, setSecretImageFile, setStyle, setResult, reset } =
-    useHideFlow();
+  const { state, setStep, setCoverFile, setSecretText, setStyle, setResult, reset } = useHideFlow();
   const extractFlow = useExtractFlow();
   const { showToast } = useToast();
   const navigate = useNavigate();
@@ -24,9 +23,7 @@ export default function HideFlow() {
     try {
       const result = await encodeSecret({
         coverImage: state.coverFile,
-        secretType: state.secretType,
         secretText: state.secretText,
-        secretImage: state.secretImageFile,
         applyStyle: state.applyStyle,
         styleName: state.styleName,
       });
@@ -61,12 +58,8 @@ export default function HideFlow() {
         )}
         {state.step === 2 && (
           <StepSecret
-            secretType={state.secretType}
-            setSecretType={setSecretType}
             secretText={state.secretText}
             setSecretText={setSecretText}
-            secretImageFile={state.secretImageFile}
-            setSecretImageFile={setSecretImageFile}
             onBack={() => setStep(1)}
             onNext={() => setStep(3)}
           />
@@ -125,54 +118,27 @@ function StepCover({ coverFile, setCoverFile, onNext }) {
   );
 }
 
-function StepSecret({ secretType, setSecretType, secretText, setSecretText, secretImageFile, setSecretImageFile, onBack, onNext }) {
-  const overLimit = secretType === "text" && secretText.length > MAX_TEXT_CHARS;
-  const canProceed = secretType === "text" ? secretText.trim().length > 0 && !overLimit : Boolean(secretImageFile);
+function StepSecret({ secretText, setSecretText, onBack, onNext }) {
+  const overLimit = secretText.length > MAX_TEXT_CHARS;
+  const canProceed = secretText.trim().length > 0 && !overLimit;
 
   return (
     <div>
-      <div className="mb-4 inline-flex rounded-lg border border-border bg-surface p-1" role="group" aria-label="Secret type">
-        {["text", "image"].map((t) => (
-          <button
-            key={t}
-            type="button"
-            onClick={() => setSecretType(t)}
-            aria-pressed={secretType === t}
-            className={`rounded-md px-4 py-1.5 text-sm font-medium capitalize transition-colors ${
-              secretType === t ? "brand-gradient-bg text-white" : "text-text-muted hover:text-text"
-            }`}
-          >
-            {t}
-          </button>
-        ))}
-      </div>
-
-      {secretType === "text" ? (
-        <div>
-          <label htmlFor="secret-text" className="mb-2 block text-sm font-medium text-text">
-            Secret message
-          </label>
-          <textarea
-            id="secret-text"
-            value={secretText}
-            onChange={(e) => setSecretText(e.target.value)}
-            rows={5}
-            className="w-full rounded-lg border border-border bg-surface p-3 text-sm text-text placeholder:text-text-faint focus-visible:border-brand-from"
-            placeholder="Type the message you want to hide…"
-          />
-          <p className={`mt-1.5 text-right text-xs ${overLimit ? "text-danger" : "text-text-faint"}`}>
-            {secretText.length} / {MAX_TEXT_CHARS} characters
-          </p>
-          {overLimit && <p role="alert" className="text-sm text-danger">Message is too long by {secretText.length - MAX_TEXT_CHARS} characters.</p>}
-        </div>
-      ) : (
-        <UploadDropzone
-          label="Secret image"
-          file={secretImageFile}
-          onFileSelected={setSecretImageFile}
-          helpText="This image will be hidden inside the cover image."
-        />
-      )}
+      <label htmlFor="secret-text" className="mb-2 block text-sm font-medium text-text">
+        Secret message
+      </label>
+      <textarea
+        id="secret-text"
+        value={secretText}
+        onChange={(e) => setSecretText(e.target.value)}
+        rows={5}
+        className="w-full rounded-lg border border-border bg-surface p-3 text-sm text-text placeholder:text-text-faint focus-visible:border-brand-from"
+        placeholder="Type the message you want to hide…"
+      />
+      <p className={`mt-1.5 text-right text-xs ${overLimit ? "text-danger" : "text-text-faint"}`}>
+        {secretText.length} / {MAX_TEXT_CHARS} characters
+      </p>
+      {overLimit && <p role="alert" className="text-sm text-danger">Message is too long by {secretText.length - MAX_TEXT_CHARS} characters.</p>}
 
       <WizardNav onBack={onBack} onNext={onNext} nextDisabled={!canProceed} />
     </div>

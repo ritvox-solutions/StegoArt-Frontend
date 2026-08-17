@@ -6,12 +6,6 @@ import { getStyles, getStyleThumbnailUrl } from "../api/client";
  * checkbox), per spec. Style names/thumbnails come from GET /api/styles —
  * never hardcoded here, so this always reflects whatever the backend
  * actually has loaded.
- *
- * All 4 styles are selectable regardless of secret type. udnie used to be
- * disabled for image secrets (its styled-image recovery was the worst of
- * the 4), but the backend's image-secret-dedicated model closed that gap —
- * udnie is no longer a meaningful outlier there (SSIM ~0.40 vs ~0.40-0.44
- * for the others). See ml/README.md's style-robust training experiment.
  */
 export default function StyleGallery({ selectedStyle, onSelect }) {
   const [styles, setStyles] = useState(null); // null = loading

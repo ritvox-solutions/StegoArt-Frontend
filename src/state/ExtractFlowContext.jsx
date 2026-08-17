@@ -6,7 +6,6 @@ const initial = {
   step: 1,
   stegoFile: null,
   stegoPreviewUrl: null,
-  secretTypeHint: "text", // 'text' | 'image'
   result: null, // decode response
 };
 
@@ -24,7 +23,6 @@ export function ExtractFlowProvider({ children }) {
     () => ({
       state,
       setStep: (step) => setState((s) => ({ ...s, step })),
-      setSecretTypeHint: (secretTypeHint) => setState((s) => ({ ...s, secretTypeHint })),
       setResult: (result) => setState((s) => ({ ...s, result })),
       setStegoFile: (stegoFile) =>
         setState((s) => ({

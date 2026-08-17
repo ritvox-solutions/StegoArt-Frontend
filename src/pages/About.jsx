@@ -6,8 +6,8 @@ const sections = [
         <p>
           Steganography means hiding information inside something else so the hiding itself isn't obvious — unlike
           encryption, which scrambles a message but leaves it visibly a "secret message," steganography tries to make
-          the secret invisible in the first place. Here, the secret (a short text message or a small image) is hidden
-          inside an everyday cover photo. To the eye, the resulting "stego image" looks just like the original photo.
+          the secret invisible in the first place. Here, the secret (a short text message) is hidden inside an
+          everyday cover photo. To the eye, the resulting "stego image" looks just like the original photo.
         </p>
       </>
     ),
@@ -33,9 +33,9 @@ const sections = [
         <p className="mt-3">
           Both networks are convolutional neural networks (CNNs) — the same broad family of model used for most
           modern image recognition — trained together on thousands of example photos until the Hiding Network gets
-          good at concealing and the Reveal Network gets good at recovering, at the same time. A message is first
-          turned into a simple grid of on/off values, and an image secret is just used as-is; either way, both ends
-          agree on exactly one shared format, so the same Reveal Network can recover either kind of secret.
+          good at concealing and the Reveal Network gets good at recovering, at the same time. The message is first
+          turned into a simple grid of on/off values before it's embedded, so both ends agree on exactly one shared
+          format.
         </p>
       </>
     ),

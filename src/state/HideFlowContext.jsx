@@ -5,9 +5,7 @@ const HideFlowContext = createContext(null);
 const initial = {
   step: 1,
   coverFile: null,
-  secretType: "text", // 'text' | 'image'
   secretText: "",
-  secretImageFile: null,
   applyStyle: false,
   styleName: null,
   result: null, // encode response
@@ -26,9 +24,7 @@ export function HideFlowProvider({ children }) {
       state,
       setStep: (step) => setState((s) => ({ ...s, step })),
       setCoverFile: (coverFile) => setState((s) => ({ ...s, coverFile })),
-      setSecretType: (secretType) => setState((s) => ({ ...s, secretType })),
       setSecretText: (secretText) => setState((s) => ({ ...s, secretText })),
-      setSecretImageFile: (secretImageFile) => setState((s) => ({ ...s, secretImageFile })),
       setStyle: (applyStyle, styleName) => setState((s) => ({ ...s, applyStyle, styleName })),
       setResult: (result) => setState((s) => ({ ...s, result })),
       reset: () => setState(initial),

@@ -52,18 +52,12 @@ function unwrapError(error) {
 
 /**
  * POST /api/encode
- * @param {{coverImage: File, secretType: 'text'|'image', secretText?: string,
- *   secretImage?: File, applyStyle?: boolean, styleName?: string}} params
+ * @param {{coverImage: File, secretText: string, applyStyle?: boolean, styleName?: string}} params
  */
-export async function encodeSecret({ coverImage, secretType, secretText, secretImage, applyStyle, styleName }) {
+export async function encodeSecret({ coverImage, secretText, applyStyle, styleName }) {
   const form = new FormData();
   form.append("cover_image", coverImage);
-  form.append("secret_type", secretType);
-  if (secretType === "text") {
-    form.append("secret_text", secretText ?? "");
-  } else if (secretImage) {
-    form.append("secret_image", secretImage);
-  }
+  form.append("secret_text", secretText ?? "");
   form.append("apply_style", applyStyle ? "true" : "false");
   if (applyStyle && styleName) {
     form.append("style_name", styleName);
@@ -79,12 +73,11 @@ export async function encodeSecret({ coverImage, secretType, secretText, secretI
 
 /**
  * POST /api/decode
- * @param {{stegoImage: File, secretTypeHint: 'text'|'image'}} params
+ * @param {{stegoImage: File}} params
  */
-export async function decodeSecret({ stegoImage, secretTypeHint }) {
+export async function decodeSecret({ stegoImage }) {
   const form = new FormData();
   form.append("stego_image", stegoImage);
-  form.append("secret_type_hint", secretTypeHint);
 
   try {
     const { data } = await http.post("/api/decode", form);

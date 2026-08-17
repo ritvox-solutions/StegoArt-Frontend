@@ -17,7 +17,7 @@ export default function Home() {
           <span className="brand-gradient-text">invisibly.</span>
         </h1>
         <p className="mx-auto mt-5 max-w-2xl text-base text-text-muted sm:text-lg">
-          A trained encoder/decoder pair embeds text or an image inside an ordinary cover photo — imperceptible to
+          A trained encoder/decoder pair embeds a text message inside an ordinary cover photo — imperceptible to
           the eye, recoverable on demand. An optional neural style transfer step can restyle the result afterward,
           purely for presentation.
         </p>
@@ -33,7 +33,7 @@ export default function Home() {
           </span>
           <h2 className="mt-5 text-xl font-bold">Hide Data</h2>
           <p className="mt-2 text-sm text-text-muted">
-            Embed a text message or an image inside a cover photo, with an optional artistic style applied on top.
+            Embed a text message inside a cover photo, with an optional artistic style applied on top.
           </p>
           <span className="mt-5 inline-flex items-center gap-1 text-sm font-semibold text-brand group-hover:gap-2 transition-all">
             Start hiding <span aria-hidden="true">→</span>
@@ -49,7 +49,7 @@ export default function Home() {
           </span>
           <h2 className="mt-5 text-xl font-bold">Extract Data</h2>
           <p className="mt-2 text-sm text-text-muted">
-            Upload a plain (unstyled) stego image and recover the text or image hidden inside it.
+            Upload a plain (unstyled) stego image and recover the text message hidden inside it.
           </p>
           <span className="mt-5 inline-flex items-center gap-1 text-sm font-semibold text-brand group-hover:gap-2 transition-all">
             Start extracting <span aria-hidden="true">→</span>
